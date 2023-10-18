@@ -1,5 +1,5 @@
 Instance: patient1
-InstanceOf: http://www.ehealth.fgov.be/standards/fhir/core/be-patient
+InstanceOf: Patient
 Usage: #example
 * meta.versionId = "1"
 * meta.lastUpdated = "2019-07-01T13:30:55.864+00:00"
@@ -15,7 +15,7 @@ Usage: #example
 * identifier[=].type = $v2-0203#SB "Social Beneficiary Identifier"
 * identifier[=].system = "https://www.ehealth.fgov.be/standards/fhir/core/NamingSystem/ssin"
 * identifier[=].value = "OZADJVppdeQzwgvAUjQNaLvuf94ulY6iDgeip7iSHAW7TNrDBa0XMGeS6G3s/HWLSQ4eirpcox28GghzbtaiUzg=.UPOBi75XsreuYfQwyVvIaHgpzrrdS6joS8JaPlkMPxeU8FmFHRtteJp/FAq91pEllcbH4V4PRSC+QEm0C9thkO4="
-* identifier[=].value.extension[BeExtPseudonymization].extension[transitInfo].valueString = "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwia2lkIjoiMjAyMi0xMiIsImF1ZCI6Imh0dHBzOi8vYXBpLWludC5laGVhbHRoLmZnb3YuYmUvcHNldWRvL3YxL2RvbWFpbnMvdWhtZXBfdjEifQ..h4IU5TFgQVqIR7VM.iSQbF1_yavnS_wocHZRViX3Xtfo25dq8bQto_CZHzfJugVyRpQ3mlCDJRqHaBlAq10nd5z0L_dM2ut1NvRKglJvF0vk2cv6HY0RJgs1WzbtEWxH7R2ttsKNo1TPdI8FEQfoNGJafQLktWHaIMUl5w2FeMFSYBVZtL4cn1sSCH_ndinbReAzJiZX1aa3TD9abQVNy5xaF5-Df9Xys5G_SdjHxwUfH-BKudQmLkfcG5rFkSX4EhrbkptPOcSIO8im44d4rAsG8D5Bd.kBfA7FUaLyB0SMqhIyzOzQ"
+* identifier[=].value.extension[BeExtPseudonymization].extension[marker].valueBoolean = true
 * identifier[+].use = #usual
 * identifier[=].type = $v2-0203#MR "Medical record number"
 * identifier[=].system = "https://www.goodhealthhospital.be/standards/fhir/NamingSystem/patientrecord"
@@ -86,4 +86,3 @@ Usage: #example
 * contact.telecom.system = #phone
 * contact.telecom.value = "+31201234567"
 * contact.telecom.use = #mobile
-* generalPractitioner = Reference(practitioner1)

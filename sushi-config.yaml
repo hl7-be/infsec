@@ -14,7 +14,7 @@ url: https://www.ehealth.fgov.be/standards/fhir/infsec
 name: hl7.fhir.be.infsec
 title: "eHealth Platform Federal infsec Profiles"
 description: "eHealth Platform Federal infsec Profiles"
-status: active
+status: draft
 license: CC0-1.0
 date: 2023-10-18
 version: 1.0.0
@@ -132,9 +132,8 @@ jurisdiction: urn:iso:std:iso:3166#BE "Belgium"
 pages:
   index.xml:
     title: IG Home Page
-  guidance.xml:
+  guidance.md:
     title: Guidance
-  conventions.md:
   changes.xml:
   downloads.xml:
 
@@ -162,11 +161,9 @@ pages:
 menu:
   Home: index.html
   Guidance: guidance.html
-  Conventions: conventions.html
   Artifacts:
-    Profiles: artifacts.html#2
-    Extensions: artifacts.html#3
-    Value Sets: artifacts.html#4
+    Extensions: artifacts.html#structures-extension-definitions
+    Examples: artifacts.html#example-example-instances
   Downloads: downloads.html
   Changes: changes.html
   History: https://www.ehealth.fgov.be/standards/fhir/infsec/history.html
