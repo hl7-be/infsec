@@ -1,3 +1,4 @@
+
 # ╭─────────────────────────────────ImplementationGuide-fish.json──────────────────────────────────╮
 # │  The properties below are used to create the ImplementationGuide resource.                     │
 # │  For a list of supported properties, see:                                                      │
@@ -7,20 +8,20 @@
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 
 
-id: my-ig
-canonical: http://example.com/fhir/example
-url: http://example.com/fhir/example/ImplementationGuide/my-ig
-name: ExampleIG
-title: "HL7 FHIR Implementation Guide: Example IG Release 1 - US Realm | STU1"
-description: Example IG exercises many of the fields in a SUSHI configuration.
-status: active
+id: hl7.fhir.be.infsec
+canonical: https://www.ehealth.fgov.be/standards/fhir/infsec
+url: https://www.ehealth.fgov.be/standards/fhir/infsec
+name: hl7.fhir.be.infsec
+title: "eHealth Platform Federal infsec Profiles"
+description: "eHealth Platform Federal infsec Profiles"
+status: draft
 license: CC0-1.0
-date: 2020-02-26
+date: 2023-10-18
 version: 1.0.0
 
 # Although fhirVersions is 0..* in the ImplementationGuide resource
-# it can be a single item OR and array here, but the current tooling 
-# only supports one FHIR version per Implementation Guide
+# it can be a single item OR and array here (but so far SUSHI only
+# supports 4.0.1 anyway).
 fhirVersion: 4.0.1
 
 # The following two lines correspond to items that used to be in
@@ -37,23 +38,23 @@ releaseLabel: STU1
 # as IG.publisher.  The contact details and/or additional publishers
 # will be translated into IG.contact values.
 publisher:
-  name: My Organization 
-  url: http://example.com/committees
-  email: my-group@example.com
+  name: eHealth Platform 
+  url: https://www.ehealth.fgov.be/standards/fhir
+  email: support@be-ehealth-standards.atlassian.net
 
 # ContactDetail is required by the template.
 contact:
-  - name: Bob Smith
+  - name: Message Structure eHealth
     telecom:
       - system: email
-        value: bobsmith@example.com
+        value: support@be-ehealth-standards.atlassian.net
         use: work
 
 # The jurisdiction can be a single item or a list. The FHIR Shorthand
 # code syntax can be used here.
 
-#jurisdiction: urn:iso:std:iso:3166#US "United States of America"
-jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
+jurisdiction: urn:iso:std:iso:3166#BE "Belgium"
+#jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
 
 
 # The dependencies property corresponds to IG.dependsOn. The key is the
@@ -130,10 +131,12 @@ jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#001 "World"
 # sub-pages.
 pages:
   index.xml:
-    title: Home
-#  guidance.md:
+    title: IG Home Page
+  guidance.md:
+    title: Guidance
   changes.xml:
   downloads.xml:
+
 # The ImplementationGuide resource defines several other properties
 # not represented above. These properties can be used as-is and
 # should follow the format defined in ImplementationGuide:
@@ -157,11 +160,13 @@ pages:
 # include a `menu.xml` file in input/includes.
 menu:
   Home: index.html
-#  Guidance: guidance.html
-  Artifacts: artifacts.html
+  Guidance: guidance.html
+  Artifacts:
+    Extensions: artifacts.html#structures-extension-definitions
+    Examples: artifacts.html#example-example-instances
   Downloads: downloads.html
   Changes: changes.html
-#  History: ../history.html
+  History: https://www.ehealth.fgov.be/standards/fhir/infsec/history.html
 
 # The parameters property represents IG.definition.parameter. Rather
 # than a list of code/value pairs (as in the ImplementationGuide
@@ -181,3 +186,15 @@ FSHOnly: false
 # When set to true, the "short" and "definition" field on the root element of an Extension will
 # be set to the "Title" and "Description" of that Extension. Default is true.
 #applyExtensionMetadataToRoot: false
+
+parameters:
+  shownav: 'true'
+  apply-contact: 'true'
+  apply-jurisdiction: 'true'
+  apply-publisher: 'true'
+  apply-version: 'true'
+  propagate-status: true
+  display-warnings: true
+
+
+
