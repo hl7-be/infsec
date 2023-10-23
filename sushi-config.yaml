@@ -14,7 +14,7 @@ url: https://www.ehealth.fgov.be/standards/fhir/infsec
 name: hl7.fhir.be.infsec
 title: "eHealth Platform Federal infsec Profiles"
 description: "eHealth Platform Federal infsec Profiles"
-status: draft
+status: active
 license: CC0-1.0
 date: 2023-10-18
 version: 1.0.0
