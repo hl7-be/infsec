@@ -11,6 +11,8 @@ Usage: #example
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/patient-nationality"
 * extension[=].extension.url = "code"
 * extension[=].extension.valueCodeableConcept = $cd-fed-country#BE "Belgium"
+* extension[+].url = "https://www.ehealth.fgov.be/standards/fhir/infsec/StructureDefinition/be-ext-intended-profile"
+* extension[=].valueCanonical = "https://www.ehealth.fgov.be/standards/fhir/core/StructureDefinition/be-patient|2.1.0"
 * identifier[0].use = #official
 * identifier[=].type = $v2-0203#SB "Social Beneficiary Identifier"
 * identifier[=].system = "https://www.ehealth.fgov.be/standards/fhir/core/NamingSystem/ssin"
