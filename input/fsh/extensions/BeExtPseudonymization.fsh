@@ -5,6 +5,11 @@ Description: "This is a marker interface. If the field is pseudonymized, the str
 * ^context.type = #element
 * ^context.expression = "Element"
 * . ^short = "Pseudonymization data"
-* extension contains  marker 1..1 MS 
+* extension contains  marker 1..1 MS and
+    kid 0..1 MS
 * extension[marker].value[x] only boolean
 * extension[marker].valueBoolean = true
+* extension[kid].value[x] only string
+* extension[kid].valueString 0..1 MS 
+* extension[kid].valueString ^short = "kid, only in case of Blinded Pseudonymization Cookbook, Annex: Processing of input data exceeding 32
+bytes"
