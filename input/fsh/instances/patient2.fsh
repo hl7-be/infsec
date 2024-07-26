@@ -1,15 +1,13 @@
 Instance: patient2
 InstanceOf: Patient
 Usage: #example
-* meta.versionId = "1"
-* meta.lastUpdated = "2019-07-01T13:30:55.864+00:00"
-* extension[+].url = "https://www.ehealth.fgov.be/standards/fhir/infsec/StructureDefinition/be-ext-key-pseudonymization"
-* extension[=].id = "fcc557e7-40fa-4fde-b802-12a461cd176f"
-* extension[=].extension[+].url = "jwe"
-* extension[=].extension[=].valueString = "eyJraWQiOiJmY2M1NTdlNy00MGZhLTRmZGUtYjgwMi0xMmE0NjFjZDE3NmYiLCJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0="
-* extension[=].extension[+].url = "key"
-* extension[=].extension[=].valueString = "OZADJVppdeQzwgvAUjQNaLvuf94ulY6iDgeip7iSHAW7TNrDBa0XMGeS6G3s/HWLSQ4eirpcox28GghzbtaiUzg=.UPOBi75XsreuYfQwyVvIaHgpzrrdS6joS8JaPlkMPxeU8FmFHRtteJp/FAq91pEllcbH4V4PRSC+QEm0C9thkO4="
-* extension[=].extension[=].valueString.extension[BeExtPseudonymization].extension[marker].valueBoolean = true
+* meta.extension[+].url = "https://www.ehealth.fgov.be/standards/fhir/infsec/StructureDefinition/be-ext-key-pseudonymization"
+* meta.extension[=].id = "fcc557e7-40fa-4fde-b802-12a461cd176f"
+* meta.extension[=].extension[+].url = "jwe"
+* meta.extension[=].extension[=].valueString = "eyJraWQiOiJmY2M1NTdlNy00MGZhLTRmZGUtYjgwMi0xMmE0NjFjZDE3NmYiLCJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0="
+* meta.extension[=].extension[+].url = "key"
+* meta.extension[=].extension[=].valueString = "OZADJVppdeQzwgvAUjQNaLvuf94ulY6iDgeip7iSHAW7TNrDBa0XMGeS6G3s/HWLSQ4eirpcox28GghzbtaiUzg=.UPOBi75XsreuYfQwyVvIaHgpzrrdS6joS8JaPlkMPxeU8FmFHRtteJp/FAq91pEllcbH4V4PRSC+QEm0C9thkO4="
+* meta.extension[=].extension[=].valueString.extension[BeExtPseudonymization].extension[marker].valueBoolean = true
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/patient-birthPlace"
 * extension[=].valueAddress.extension.url = "http://hl7.org/fhir/StructureDefinition/language"
 * extension[=].valueAddress.extension.valueCode = #nl
