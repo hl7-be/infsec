@@ -3,10 +3,8 @@ InstanceOf: Patient
 Usage: #example
 * meta.extension[+].url = "https://www.ehealth.fgov.be/standards/fhir/infsec/StructureDefinition/be-ext-key-pseudonymization"
 * meta.extension[=].id = "fcc557e7-40fa-4fde-b802-12a461cd176f"
-* meta.extension[=].extension[+].url = "jwe"
-* meta.extension[=].extension[=].valueString = "eyJraWQiOiJmY2M1NTdlNy00MGZhLTRmZGUtYjgwMi0xMmE0NjFjZDE3NmYiLCJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0="
 * meta.extension[=].extension[+].url = "key"
-* meta.extension[=].extension[=].valueString = "OZADJVppdeQzwgvAUjQNaLvuf94ulY6iDgeip7iSHAW7TNrDBa0XMGeS6G3s/HWLSQ4eirpcox28GghzbtaiUzg=.UPOBi75XsreuYfQwyVvIaHgpzrrdS6joS8JaPlkMPxeU8FmFHRtteJp/FAq91pEllcbH4V4PRSC+QEm0C9thkO4="
+* meta.extension[=].extension[=].valueString = "urn:be:fgov:pseudo:v2:OZADJVppdeQzwgvAUjQNaLvuf94ulY6iDgeip7iSHAW7TNrDBa0XMGeS6G3s/HWLSQ4eirpcox28GghzbtaiUzg=.UPOBi75XsreuYfQwyVvIaHgpzrrdS6joS8JaPlkMPxeU8FmFHRtteJp/FAq91pEllcbH4V4PRSC+QEm0C9thkO4="
 * meta.extension[=].extension[=].valueString.extension[BeExtPseudonymization].extension[marker].valueBoolean = true
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/patient-birthPlace"
 * extension[=].valueAddress.extension.url = "http://hl7.org/fhir/StructureDefinition/language"
@@ -23,7 +21,8 @@ Usage: #example
 * identifier[=].system = "https://www.ehealth.fgov.be/standards/fhir/core/NamingSystem/ssin"
 * identifier[=].value = "OZADJVppdeQzwgvAUjQNaLvuf94ulY6iDgeip7iSHAW7TNrDBa0XMGeS6G3s/HWLSQ4eirpcox28GghzbtaiUzg=.UPOBi75XsreuYfQwyVvIaHgpzrrdS6joS8JaPlkMPxeU8FmFHRtteJp/FAq91pEllcbH4V4PRSC+QEm0C9thkO4="
 * identifier[=].value.extension[BeExtPseudonymization].extension[marker].valueBoolean = true
-* identifier[=].value.extension[BeExtPseudonymization].extension[kid].valueString = "fcc557e7-40fa-4fde-b802-12a461cd176f"
+* identifier[=].value.extension[BeExtPseudonymization].extension[format].valueCode = #encrypted
+* identifier[=].value.extension[BeExtPseudonymization].extension[version].valuePositiveInt = 1
 * identifier[+].use = #usual
 * identifier[=].type = $v2-0203#MR "Medical record number"
 * identifier[=].system = "https://www.goodhealthhospital.be/standards/fhir/NamingSystem/patientrecord"

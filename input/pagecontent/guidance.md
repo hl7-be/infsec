@@ -1,4 +1,4 @@
-### The use of pseudonymisation in FHIR for short texts
+### The use of pseudonymisation in FHIR
 
 Pseudonymisation is the activity of replacing meaningful data with a synonym that hides the original data, but when needed this synonym can be replaced by the original data. The aim is to hide data from readers that do not need it, due to legal (GDPR) or other reasons, but still allow the links between different data elements for those who need it. Additional encryption techniques may be used to restrict the access to the information to those who need it.
 
@@ -16,15 +16,23 @@ This solution only applies for short texts, i.e. text that fall within the lengt
 * Pseudonymisation should interfere as little as possible with the standard FHIR APIs for searching information, without endangering the essence of pseudonymisation.
 * Pseudonymisation should be as coherent as possible, so that the developer can (re)use the same techniques whenever he encounters pseudonymisation.
 
-#### The solution:
+#### The solution for short texts, less than 32 bytes:
 
 * Within the FHIR document, a pseudonymised value will be marked by an extension. This extension is applicable to any text field (string).
-* The original value of the string will be replaced by the pseudonym. This pseudonym is a JWE encoded string, containing the transitinfo, x and y value.
-* At this moment, the extension does not contain any other fields, but these might be added in the solution for long texts.
-* Searching on a pseudonymised field will be done using the normal search parameter. The fact that this search parameter contains a pseudonym will be indicated by a urn-style prefix. The pseudonym will be represented by the same JWE encoded string as described in item 2.
+* The original value of the string will be replaced by the pseudonym. This pseudonym can take following forms:
+   - {base64 json string, containing x, y, and transitInfo}
+   - urn:be:fgov:pseudo:v1:{base64 json string, containing x, y, and transitInfo}
+
+* The extension will have following fields:
+   - marker: true (mandatory), indicates that this field is a pseudonym.
+   - format: direct|encrypted (optional) default is direct
+      + direct indicates that the field is an immediate result of the pseudonymization service
+      + encrypted see below for texts larger than 32 bytes. 
+   - version: no version defaults to version 1
+* Searching on a pseudonymised field will be done using the normal search parameter. The fact that this search parameter contains a pseudonym will be indicated by a urn-style prefix. The pseudonym will be represented by the same way as described in item 2. "urn:be:fgov:pseudo-encrypted:" fields cannot be used in a search, if the search parameters are not available as a resource.
 * Depending on the need of the implementing server, and the length of the query string, the implementing server will be able to use both GET and POST to execute the search, according to the FHIR specifications. The use of POST might be necessary in case of the combination of several pseudonymised search parameters in one query string.
 
-Example of a json containing a pseudonym, before the application of JWE:
+Example of a json containing a pseudonym, before the application of the base64 encoding:
 
 ```
 {
@@ -46,6 +54,21 @@ The resulting value will look like this:
 urn:be:fgov:ehealth:pseudo:v1:eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwia2lkIjoiMjAyMi0xMi... 
 
 ```
+
+#### The solution for short texts, larger than 32 bytes:
+
+* Within the FHIR document, a pseudonymised value will be marked by an extension. This extension is applicable to any text field (string).
+* The original value of the string will be replaced by the pseudonym. This pseudonym can take following forms:
+   - urn:be:fgov:pseudo-encrypted:v1:{KID}:{JWE}
+* The extension will have following fields:
+   - marker: true (mandatory), indicates that this field is a pseudonym.
+   - format: direct|encrypted (optional), default is direct
+      +  direct see above for texts less than 32 bytes
+      + encrypted indicates that the field is encrypted with a key you can find in the .meta section of the resource, in the extension with url "https://www.ehealth.fgov.be/standards/fhir/infsec/StructureDefinition/be-ext-key-pseudonymization". 
+   - version: no version defaults to version 1
+* In each resource of the document, you will add an extension with url "https://www.ehealth.fgov.be/standards/fhir/infsec/StructureDefinition/be-ext-key-pseudonymization"
+   - This extension contains one extension containing a string value, with url "key". This is the encryption key that can be used to blockcipher the long text fields. The key is 32 bytes or less, so direct pseudonymization applies.
+   - This .valueString field is pseudonymized in the direct way, using a pseudonymize extension for short texts. 
 
 ### Ensuring computable integrity clarifying the use of meta.profile and semantic integrity by using the BeExtIntendedProfile extension
 
