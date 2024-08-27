@@ -22,6 +22,7 @@ This solution only applies for short texts, i.e. text that fall within the lengt
 * The original value of the string will be replaced by the pseudonym. This pseudonym can take following forms:
    - {base64 json string, containing x, y, and transitInfo}
    - urn:be:fgov:pseudo:v1:{base64 json string, containing x, y, and transitInfo}
+   - urn:be:fgov:pseudo:v2:{SEC1}:{transitInfo} - this type of encoding prevents the double Base64 encoding in v1. See the annexes of the Blinded Pseudonymization Cookbook for more info.
 
 * The extension will have following fields:
    - marker: true (mandatory), indicates that this field is a pseudonym.
@@ -49,6 +50,14 @@ If you want to use the pseudonym for searching, you take the resulting value, an
 ```
 urn:be:fgov:ehealth:pseudo:v1:
 ```
+or 
+
+```
+urn:be:fgov:ehealth:pseudo:v2:
+```
+depending on the type of pseudonymization you are using. Beware that you can only use the long text solution (urn:be:fgov:pseudo-encrypted:) in searches if the body of the query request contains a FHIR resource that can handle the pseudonymized key.
+
+
 The resulting value will look like this:
 ```
 urn:be:fgov:ehealth:pseudo:v1:eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwia2lkIjoiMjAyMi0xMi... 
