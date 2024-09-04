@@ -29,7 +29,7 @@ This solution only applies for short texts, i.e. text that fall within the lengt
    - format: direct|encrypted (optional) default is direct
       + direct indicates that the field is an immediate result of the pseudonymization service
       + encrypted see below for texts larger than 32 bytes. 
-   - version: no version defaults to version 1
+   - version: no version defaults to 1. If the version is different from 1, it is mandatory.
 * Searching on a pseudonymised field will be done using the normal search parameter. The fact that this search parameter contains a pseudonym will be indicated by a urn-style prefix. The pseudonym will be represented by the same way as described in item 2. "urn:be:fgov:pseudo-encrypted:" fields cannot be used in a search, if the search parameters are not available as a resource.
 * Depending on the need of the implementing server, and the length of the query string, the implementing server will be able to use both GET and POST to execute the search, according to the FHIR specifications. The use of POST might be necessary in case of the combination of several pseudonymised search parameters in one query string.
 
@@ -74,7 +74,7 @@ urn:be:fgov:ehealth:pseudo:v1:eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwia2lkIjoiMj
    - format: direct|encrypted (optional), default is direct
       +  direct see above for texts less than 32 bytes
       + encrypted indicates that the field is encrypted with a key you can find in the .meta section of the resource, in the extension with url "https://www.ehealth.fgov.be/standards/fhir/infsec/StructureDefinition/be-ext-key-pseudonymization". 
-   - version: no version defaults to version 1
+   - version: no version defaults to 1. If the version is different from 1, it is mandatory.
 * In each resource of the document, you will add an extension with url "https://www.ehealth.fgov.be/standards/fhir/infsec/StructureDefinition/be-ext-key-pseudonymization"
    - This extension contains one extension containing a string value, with url "key". This is the encryption key that can be used to blockcipher the long text fields. The key is 32 bytes or less, so direct pseudonymization applies.
    - This .valueString field is pseudonymized in the direct way, using a pseudonymize extension for short texts. 
