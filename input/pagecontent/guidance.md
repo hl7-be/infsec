@@ -64,7 +64,7 @@ urn:be:fgov:ehealth:pseudo:v1:eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwia2lkIjoiMj
 
 ```
 
-#### The solution for short texts, larger than 32 bytes:
+#### The solution for long texts, larger than 32 bytes:
 
 * Within the FHIR document, a pseudonymised value will be marked by an extension. This extension is applicable to any text field (string).
 * The original value of the string will be replaced by the pseudonym. This pseudonym can take following forms:
