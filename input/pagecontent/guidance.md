@@ -71,13 +71,37 @@ urn:be:fgov:ehealth:pseudo:v1:eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwia2lkIjoiMj
    - urn:be:fgov:pseudo-encrypted:v1:{KID}:{JWE}
 * The extension will have following fields:
    - marker: true (mandatory), indicates that this field is a pseudonym.
-   - format: direct|encrypted (optional), default is direct
+   - format: direct or encrypted (optional), default is direct
       +  direct see above for texts less than 32 bytes
       + encrypted indicates that the field is encrypted with a key you can find in the .meta section of the resource, in the extension with url "https://www.ehealth.fgov.be/standards/fhir/infsec/StructureDefinition/be-ext-key-pseudonymization". 
    - version: no version defaults to 1. If the version is different from 1, it is mandatory.
 * In each resource of the document, you will add an extension with url "https://www.ehealth.fgov.be/standards/fhir/infsec/StructureDefinition/be-ext-key-pseudonymization"
    - This extension contains one extension containing a string value, with url "key". This is the encryption key that can be used to blockcipher the long text fields. The key is 32 bytes or less, so direct pseudonymization applies.
    - This .valueString field is pseudonymized in the direct way, using a pseudonymize extension for short texts. 
+
+#### Content negotiation for pseudonymisation in FHIR
+
+As clients and servers may have different capabilities with regard to the support of pseudonymisation representations, both clients and servers can express their capabilities and conduct negotiations regarding the pseudonymisation representations to be used.
+
+The client will be able to express his preferences by using the Accept-Be-Pseudo HTTP header. This header SHALL contain a comma separated list of the prefix values as described above.
+
+```
+Accept-Be-Pseudo: urn:be:fgov:ehealth:pseudo:v1, urn:be:fgov:ehealth:pseudo:v2, urn:be:fgov:pseudo-encrypted:v1
+```
+This header has been designed according to the guidelines in [RFC 6648](https://www.rfc-editor.org/rfc/rfc6648)
+
+If the header is not present in the request, the server will default to the lowest version supported as indicated in the capabilities statement (see further).
+
+The server will indicate the version of pseudonymisation used using the Content-Be-Pseudo header.
+
+```
+Content-Be-Pseudo: urn:be:fgov:ehealth:pseudo:v2, urn:be:fgov:pseudo-encrypted:v1
+```
+This header is only an suggestion, and the indications in the FHIR resource itself always take precedence over the value in the header. If the header is missing, and there is no conclusive evidence (taking into account the described defaults), the value defaults to the lowest supported version in the capabilities statement.
+
+The server has the opportunity to indicate its preferred use of pseudonymisation in the capabilities statement, as one or more ``rest.security.service`` codeable concepts from CodeSystem [be-cs-pseudonymization-version](./CodeSystem-be-cs-pseudonymization-version.html). The client is supposed, as in [good fhir practice](https://www.hl7.org/fhir/R4/http.html#capabilities), to request the capabilities statement of the server, to check the type of pseudonymisation that is expected. If no explicit pseudonymisation representation is present, the client can try to use his own preference, but must be prepared to accept a refusal in the form of a 422 Error Code. In general, sending pseudonymised content to a server that is not capable of handling it, will provoke undefined behaviour with regard to the pseudonymisation definition.
+
+During the pseudonymisation content negotiation, the client and server should choose the highest version that is supported by both client and server. Versions will be ordered by using the ordering rules of positive integers. 
 
 ### Ensuring computable integrity clarifying the use of meta.profile and semantic integrity by using the BeExtIntendedProfile extension
 

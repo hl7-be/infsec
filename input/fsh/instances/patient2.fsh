@@ -19,7 +19,7 @@ Usage: #example
 * identifier[0].use = #official
 * identifier[=].type = $v2-0203#SB "Social Beneficiary Identifier"
 * identifier[=].system = "https://www.ehealth.fgov.be/standards/fhir/core/NamingSystem/ssin"
-* identifier[=].value = "OZADJVppdeQzwgvAUjQNaLvuf94ulY6iDgeip7iSHAW7TNrDBa0XMGeS6G3s/HWLSQ4eirpcox28GghzbtaiUzg=.UPOBi75XsreuYfQwyVvIaHgpzrrdS6joS8JaPlkMPxeU8FmFHRtteJp/FAq91pEllcbH4V4PRSC+QEm0C9thkO4="
+* identifier[=].value = "urn:be:fgov:pseudo-encrypted:v1:OZADJVppdeQzwgvAUjQNaLvuf94ulY6iDgeip7i:SHAW7TNrDBa0XMGeS6G3s/HWLSQ4eirpcox28GghzbtaiUzg=.UPOBi75XsreuYfQwyVvIaHgpzrrdS6joS8JaPlkMPxeU8FmFHRtteJp/FAq91pEllcbH4V4PRSC+QEm0C9thkO4="
 * identifier[=].value.extension[BeExtPseudonymization].extension[marker].valueBoolean = true
 * identifier[=].value.extension[BeExtPseudonymization].extension[format].valueCode = #encrypted
 * identifier[=].value.extension[BeExtPseudonymization].extension[version].valuePositiveInt = 1
