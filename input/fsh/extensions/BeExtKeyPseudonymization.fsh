@@ -13,4 +13,3 @@ bytes)"
 * extension[key].valueString 1..1 MS 
 * extension[key].valueString ^short = "pseudonymized key"
 * extension[key].value[x].extension contains BeExtPseudonymization named pseudonymization 1..1
-* extension[key] obeys BeInvKeyPseudonymization
