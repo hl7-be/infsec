@@ -1,4 +1,4 @@
-### The use of pseudonymisation in FHIR for short texts
+### The use of pseudonymisation in FHIR
 
 Pseudonymisation is the activity of replacing meaningful data with a synonym that hides the original data, but when needed this synonym can be replaced by the original data. The aim is to hide data from readers that do not need it, due to legal (GDPR) or other reasons, but still allow the links between different data elements for those who need it. Additional encryption techniques may be used to restrict the access to the information to those who need it.
 
@@ -16,15 +16,24 @@ This solution only applies for short texts, i.e. text that fall within the lengt
 * Pseudonymisation should interfere as little as possible with the standard FHIR APIs for searching information, without endangering the essence of pseudonymisation.
 * Pseudonymisation should be as coherent as possible, so that the developer can (re)use the same techniques whenever he encounters pseudonymisation.
 
-#### The solution:
+#### The solution for short texts, less than 32 bytes:
 
 * Within the FHIR document, a pseudonymised value will be marked by an extension. This extension is applicable to any text field (string).
-* The original value of the string will be replaced by the pseudonym. This pseudonym is a JWE encoded string, containing the transitinfo, x and y value.
-* At this moment, the extension does not contain any other fields, but these might be added in the solution for long texts.
-* Searching on a pseudonymised field will be done using the normal search parameter. The fact that this search parameter contains a pseudonym will be indicated by a urn-style prefix. The pseudonym will be represented by the same JWE encoded string as described in item 2.
+* The original value of the string will be replaced by the pseudonym. This pseudonym can take following forms:
+   - {base64 json string, containing x, y, and transitInfo}
+   - urn:be:fgov:pseudo:v1:{base64 json string, containing x, y, and transitInfo}
+   - urn:be:fgov:pseudo:v2:{SEC1}:{transitInfo} - this type of encoding prevents the double Base64 encoding in v1. See the annexes of the Blinded Pseudonymization Cookbook for more info.
+
+* The extension will have following fields:
+   - marker: true (mandatory), indicates that this field is a pseudonym.
+   - format: direct|encrypted (optional) default is direct
+      + direct indicates that the field is an immediate result of the pseudonymization service
+      + encrypted see below for texts larger than 32 bytes. 
+   - version: no version defaults to 1. If the version is different from 1, it is mandatory.
+* Searching on a pseudonymised field will be done using the normal search parameter. The fact that this search parameter contains a pseudonym will be indicated by a urn-style prefix. The pseudonym will be represented by the same way as described in item 2. "urn:be:fgov:pseudo-encrypted:" fields cannot be used in a search, if the search parameters are not available as a resource.
 * Depending on the need of the implementing server, and the length of the query string, the implementing server will be able to use both GET and POST to execute the search, according to the FHIR specifications. The use of POST might be necessary in case of the combination of several pseudonymised search parameters in one query string.
 
-Example of a json containing a pseudonym, before the application of JWE:
+Example of a json containing a pseudonym, before the application of the base64 encoding:
 
 ```
 {
@@ -41,11 +50,58 @@ If you want to use the pseudonym for searching, you take the resulting value, an
 ```
 urn:be:fgov:ehealth:pseudo:v1:
 ```
+or 
+
+```
+urn:be:fgov:ehealth:pseudo:v2:
+```
+depending on the type of pseudonymization you are using. Beware that you can only use the long text solution (urn:be:fgov:pseudo-encrypted:) in searches if the body of the query request contains a FHIR resource that can handle the pseudonymized key.
+
+
 The resulting value will look like this:
 ```
 urn:be:fgov:ehealth:pseudo:v1:eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwia2lkIjoiMjAyMi0xMi... 
 
 ```
+
+#### The solution for long texts, larger than 32 bytes:
+
+* Within the FHIR document, a pseudonymised value will be marked by an extension. This extension is applicable to any text field (string).
+* The original value of the string will be replaced by the pseudonym. This pseudonym can take following forms:
+   - urn:be:fgov:pseudo-encrypted:v1:{KID}:{JWE}
+* The extension will have following fields:
+   - marker: true (mandatory), indicates that this field is a pseudonym.
+   - format: direct or encrypted (optional), default is direct
+      +  direct see above for texts less than 32 bytes
+      + encrypted indicates that the field is encrypted with a key you can find in the .meta section of the resource, in the extension with url "https://www.ehealth.fgov.be/standards/fhir/infsec/StructureDefinition/be-ext-key-pseudonymization". 
+   - version: no version defaults to 1. If the version is different from 1, it is mandatory.
+* In each resource of the document, you will add an extension with url "https://www.ehealth.fgov.be/standards/fhir/infsec/StructureDefinition/be-ext-key-pseudonymization"
+   - This extension contains one extension containing a string value, with url "key". This is the encryption key that can be used to blockcipher the long text fields. The key is 32 bytes or less, so direct pseudonymization applies.
+   - This .valueString field is pseudonymized in the direct way, using a pseudonymize extension for short texts. 
+
+#### Content negotiation for pseudonymisation in FHIR
+
+As clients and servers may have different capabilities with regard to the support of pseudonymisation representations, both clients and servers can express their capabilities and conduct negotiations regarding the pseudonymisation representations to be used.
+
+The client will be able to express his preferences by using the Accept-Be-Pseudo HTTP header. This header SHALL contain a comma separated list of the prefix values as described above.
+
+```
+Accept-Be-Pseudo: urn:be:fgov:ehealth:pseudo:v1, urn:be:fgov:ehealth:pseudo:v2, urn:be:fgov:pseudo-encrypted:v1
+```
+This header has been designed according to the guidelines in [RFC 6648](https://www.rfc-editor.org/rfc/rfc6648)
+
+If the header is not present in the request, the server will default to the lowest version supported as indicated in the capabilities statement (see further).
+
+The server will indicate the version of pseudonymisation used using the Content-Be-Pseudo header.
+
+```
+Content-Be-Pseudo: urn:be:fgov:ehealth:pseudo:v2, urn:be:fgov:pseudo-encrypted:v1
+```
+This header is only an suggestion, and the indications in the FHIR resource itself always take precedence over the value in the header. If the header is missing, and there is no conclusive evidence (taking into account the described defaults), the value defaults to the lowest supported version in the capabilities statement.
+
+The server has the opportunity to indicate its preferred use of pseudonymisation in the capabilities statement, as one or more ``rest.security.service`` codeable concepts from CodeSystem [be-cs-pseudonymization-version](./CodeSystem-be-cs-pseudonymization-version.html). The client is supposed, as in [good fhir practice](https://www.hl7.org/fhir/R4/http.html#capabilities), to request the capabilities statement of the server, to check the type of pseudonymisation that is expected. If no explicit pseudonymisation representation is present, the client can try to use his own preference, but must be prepared to accept a refusal in the form of a 422 Error Code. In general, sending pseudonymised content to a server that is not capable of handling it, will provoke undefined behaviour with regard to the pseudonymisation definition.
+
+During the pseudonymisation content negotiation, the client and server should choose the highest version that is supported by both client and server. Versions will be ordered by using the ordering rules of positive integers. 
 
 ### Ensuring computable integrity clarifying the use of meta.profile and semantic integrity by using the BeExtIntendedProfile extension
 
