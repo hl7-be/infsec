@@ -1,6 +1,6 @@
 Instance: capabilitystatement
 InstanceOf: CapabilityStatement
-Usage: #definition
+Usage: #example
 * name = "RestServer"
 * status = #active
 * date = "2024-10-21T09:29:32.761+00:00"

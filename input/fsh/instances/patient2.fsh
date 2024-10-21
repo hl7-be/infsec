@@ -4,8 +4,10 @@ Usage: #example
 * meta.extension[+].url = "https://www.ehealth.fgov.be/standards/fhir/infsec/StructureDefinition/be-ext-key-pseudonymization"
 * meta.extension[=].id = "fcc557e7-40fa-4fde-b802-12a461cd176f"
 * meta.extension[=].extension[+].url = "key"
-* meta.extension[=].extension[=].valueString = "urn:be:fgov:pseudo:v2:OZADJVppdeQzwgvAUjQNaLvuf94ulY6iDgeip7iSHAW7TNrDBa0XMGeS6G3s/HWLSQ4eirpcox28GghzbtaiUzg=.UPOBi75XsreuYfQwyVvIaHgpzrrdS6joS8JaPlkMPxeU8FmFHRtteJp/FAq91pEllcbH4V4PRSC+QEm0C9thkO4="
+* meta.extension[=].extension[=].valueString = "urn:be:fgov:pseudo:v2:OZADJVppdeQzwgvAUjQNaLvuf94ulY6iD:OZADJVppdeQzwgvAUjQNaLvuf94ulY6iDgeip7iSHAW7TNrDBa0XMGeS6G3s/HWLSQ4eirpcox28GghzbtaiUzg=.UPOBi75XsreuYfQwyVvIaHgpzrrdS6joS8JaPlkMPxeU8FmFHRtteJp/FAq91pEllcbH4V4PRSC+QEm0C9thkO4="
 * meta.extension[=].extension[=].valueString.extension[BeExtPseudonymization].extension[marker].valueBoolean = true
+* meta.extension[=].extension[=].valueString.extension[BeExtPseudonymization].extension[format].valueCode = #direct
+* meta.extension[=].extension[=].valueString.extension[BeExtPseudonymization].extension[version].valuePositiveInt = 2
 * extension[+].url = "http://hl7.org/fhir/StructureDefinition/patient-birthPlace"
 * extension[=].valueAddress.extension.url = "http://hl7.org/fhir/StructureDefinition/language"
 * extension[=].valueAddress.extension.valueCode = #nl
@@ -19,10 +21,8 @@ Usage: #example
 * identifier[0].use = #official
 * identifier[=].type = $v2-0203#SB "Social Beneficiary Identifier"
 * identifier[=].system = "https://www.ehealth.fgov.be/standards/fhir/core/NamingSystem/ssin"
-* identifier[=].value = "urn:be:fgov:pseudo-encrypted:v1:OZADJVppdeQzwgvAUjQNaLvuf94ulY6iDgeip7i:SHAW7TNrDBa0XMGeS6G3s/HWLSQ4eirpcox28GghzbtaiUzg=.UPOBi75XsreuYfQwyVvIaHgpzrrdS6joS8JaPlkMPxeU8FmFHRtteJp/FAq91pEllcbH4V4PRSC+QEm0C9thkO4="
+* identifier[=].value = "urn:be:fgov:pseudo:v1:OZADJVppdeQzwgvAUjQNaLvuf94ulY6iDgeip7iSHAW7TNrDBa0XMGeS6G3s/HWLSQ4eirpcox28GghzbtaiUzg=.UPOBi75XsreuYfQwyVvIaHgpzrrdS6joS8JaPlkMPxeU8FmFHRtteJp/FAq91pEllcbH4V4PRSC+QEm0C9thkO4="
 * identifier[=].value.extension[BeExtPseudonymization].extension[marker].valueBoolean = true
-* identifier[=].value.extension[BeExtPseudonymization].extension[format].valueCode = #encrypted
-* identifier[=].value.extension[BeExtPseudonymization].extension[version].valuePositiveInt = 1
 * identifier[+].use = #usual
 * identifier[=].type = $v2-0203#MR "Medical record number"
 * identifier[=].system = "https://www.goodhealthhospital.be/standards/fhir/NamingSystem/patientrecord"
@@ -75,7 +75,10 @@ Usage: #example
 * address[=].country = "BE"
 * address[+].use = #work
 * address[=].type = #both
-* address[=].text = "377, Avenue Prince d'Orange, 1420 Braine-lʼAlleud"
+* address[=].text = "urn:be:fgov:pseudo-encrypted:v1:fcc557e7-40fa-4fde-b802-12a461cd176f:OZADJVppdeQzwgvAUjQNaLvuf94ulY6iDgeip7iSHAW7TNrDBa0XMGeS6G3s/HWLSQ4eirpcox28GghzbtaiUzg=.UPOBi75XsreuYfQwyVvIaHgpzrrdS6joS8JaPlkMPxeU8FmFHRtteJp/FAq91pEllcbH4V4PRSC+QEm0C9thkO4="
+* address[=].text.extension[BeExtPseudonymization].extension[marker].valueBoolean = true
+* address[=].text.extension[BeExtPseudonymization].extension[format].valueCode = #encrypted
+* address[=].text.extension[BeExtPseudonymization].extension[version].valuePositiveInt = 1
 * address[=].line = "377, Avenue Prince d'Orange"
 * address[=].line.extension[0].url = "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName"
 * address[=].line.extension[=].valueString = "Avenue Prince d'Orange"
