@@ -3,8 +3,8 @@
 Pseudonymisation is the activity of replacing meaningful data with a synonym that hides the original data, but when needed this synonym can be replaced by the original data. The aim is to hide data from readers that do not need it, due to legal (GDPR) or other reasons, but still allow the links between different data elements for those who need it. Additional encryption techniques may be used to restrict the access to the information to those who need it.
 
 Detailed explanation about the pseudonymisation techniques used in this solution can be found here. 
-* [https://www.ehealth.fgov.be/ehealthplatform/fr/service-codage-anonymisation-et-ttp](https://www.ehealth.fgov.be/ehealthplatform/fr/service-codage-anonymisation-et-ttp)
-* [https://www.ehealth.fgov.be/ehealthplatform/nl/service-codering-anonimisering-en-ttp](https://www.ehealth.fgov.be/ehealthplatform/nl/service-codering-anonimisering-en-ttp)
+* [https://www.ehealth.fgov.be/ehealthplatform/fr/service-pseudonymisation-anonymisation](https://www.ehealth.fgov.be/ehealthplatform/fr/service-pseudonymisation-anonymisation)
+* [https://www.ehealth.fgov.be/ehealthplatform/nl/service-pseudonimisering-anonimisering](https://www.ehealth.fgov.be/ehealthplatform/nl/service-pseudonimisering-anonimisering)
 
 
 
