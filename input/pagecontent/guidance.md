@@ -7,7 +7,6 @@ Detailed explanation about the pseudonymisation techniques used in this solution
 * [https://www.ehealth.fgov.be/ehealthplatform/nl/service-codering-anonimisering-en-ttp](https://www.ehealth.fgov.be/ehealthplatform/nl/service-codering-anonimisering-en-ttp)
 
 
-This solution only applies for short texts, i.e. text that fall within the length of the EC key. The solution for longer texts will be described in a subsequent document.
 
 #### Prerequisites:
 
