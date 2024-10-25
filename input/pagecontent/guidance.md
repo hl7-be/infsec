@@ -26,7 +26,7 @@ This solution only applies for short texts, i.e. text that fall within the lengt
 
 * The extension will have following fields:
    - marker: true (mandatory), indicates that this field is a pseudonym.
-   - format: direct|encrypted (optional) default is direct
+   - format: direct or encrypted (optional) default is direct
       + direct indicates that the field is an immediate result of the pseudonymization service
       + encrypted see below for texts larger than 32 bytes. 
    - version: no version defaults to 1. If the version is different from 1, it is mandatory.

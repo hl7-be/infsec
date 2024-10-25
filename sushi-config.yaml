@@ -16,8 +16,8 @@ title: "eHealth Platform Federal infsec Profiles"
 description: "eHealth Platform Federal infsec Profiles"
 status: active
 license: CC0-1.0
-date: 2024-01-26
-version: 1.1.0
+date: 2024-11-14
+version: 1.2.0
 
 # Although fhirVersions is 0..* in the ImplementationGuide resource
 # it can be a single item OR and array here (but so far SUSHI only
