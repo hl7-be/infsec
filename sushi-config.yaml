@@ -163,7 +163,10 @@ menu:
   Guidance: guidance.html
   Artifacts:
     Extensions: artifacts.html#structures-extension-definitions
+    ValueSets: artifacts.html#terminology-value-sets
+    CodeSystems: artifacts.html#terminology-code-systems
     Examples: artifacts.html#example-example-instances
+
   Downloads: downloads.html
   Changes: changes.html
   History: https://www.ehealth.fgov.be/standards/fhir/infsec/history.html
@@ -196,5 +199,24 @@ parameters:
   propagate-status: true
   display-warnings: true
 
+resources:
+  CapabilityStatement/capabilitystatement:
+    name: "Capability Statement with Pseudonymisation"
+    description: This capability statement contains the entries to indicate that you support pseudo v1 and v2 and pseudo-encryption v1.
+  Bundle/bundle1:
+    name: "Bundle with pseudonymisation examples"
+    description: Each resource in the bundle has its own pseudo-encryption key
+  Parameters/parameters1:
+    name: "Parameters object with long text encryption and key"
+    description: Long text encryption for resources which are not domain resources
+  Patient/patient1:
+    name: "Patient with v1 Pseudonymisation"
+    description: Example of v1 Pseudonymisation without prefix
+  Patient/patient2:
+    name: "Patient with v2 Pseudonymisation and long text pseudonymisation"
+    description: Example of a domain resource containing both direct and encrypted pseudonymisation
+  Patient/contained1:
+    name: "Contained resource with long text pseudonymisation"
+    description: Example of a contained resource, which always has its own pseudonymisation key if long text pseudonymisation is applied.  
 
 
