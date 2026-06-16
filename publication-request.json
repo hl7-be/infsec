@@ -1,19 +1,14 @@
 {
     "package-id": "hl7.fhir.be.infsec",
-    "version": "1.2.0",
-    "path": "https://www.ehealth.fgov.be/standards/fhir/infsec/1.2.0",
+    "version": "1.3.0",
+    "path": "https://www.ehealth.fgov.be/standards/fhir/infsec/1.3.0",
     "mode" : "milestone",
     "milestone" : true,
     "status": "release",
     "sequence": "Trial Use",
+    "fhirversion": "R4",
     "desc": "eHealth FHIR Infrastructure and Security Profiles for Belgium",
-    "desccmd": "eHealth FHIR Infrastructure and Security Profiles for Belgium",
-    "title": "eHealth FHIR Infrastructure and Security Profiles for Belgium",
-    "ci-build" : "http://build.fhir.org/ig/hl7-be/infsec",
-    "category": "National Base",
-    "introduction": "eHealth FHIR Infrastructure and Security Profiles for Belgium",
-  "date": "2024-11-14", 
-  "first": false   
+    "first": false   
   }
   
   
