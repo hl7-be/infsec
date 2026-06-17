@@ -198,6 +198,7 @@ parameters:
   apply-version: 'true'
   propagate-status: true
   display-warnings: true
+  excludettl: true
 
 resources:
   CapabilityStatement/capabilitystatement:
