@@ -11,7 +11,7 @@
 id: hl7.fhir.be.infsec
 canonical: https://www.ehealth.fgov.be/standards/fhir/infsec
 #url: https://www.ehealth.fgov.be/standards/fhir/infsec
-name: hl7.fhir.be.infsec
+name: InfraAndSecurity
 title: "eHealth Platform Federal infsec Profiles"
 description: "eHealth Platform Federal infsec Profiles"
 status: active
@@ -66,6 +66,9 @@ jurisdiction: urn:iso:std:iso:3166#BE "Belgium"
 #    id: mcode
 #    uri: http://hl7.org/fhir/us/mcode/ImplementationGuide/hl7.fhir.us.mcode
 #    version: 1.0.0
+
+dependencies:
+  hl7.fhir.be.core: 2.1.2
 
 # The global property corresponds to the IG.global property, but it
 # uses the type as the YAML key and the profile as its value. Since
