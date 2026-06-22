@@ -219,6 +219,9 @@ resources:
   Patient/patient2:
     name: "Patient with v2 Pseudonymisation and long text pseudonymisation"
     description: Example of a domain resource containing both direct and encrypted pseudonymisation
+  Patient/patient3:
+    name: "Patient with v2 Pseudonymisation and pseudonymized birthDate"
+    description: Example of a domain resource containing both direct and encrypted pseudonymisation
   Patient/contained1:
     name: "Contained resource with long text pseudonymisation"
     description: Example of a contained resource, which always has its own pseudonymisation key if long text pseudonymisation is applied.  
