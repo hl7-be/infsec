@@ -11,3 +11,6 @@ WARNING: Patient/patient3: Patient.identifier[1].system: No definition could be 
 WARNING: Bundle/bundle1: Bundle.entry[0].resource/*Patient/patient1*/.identifier[1].system: No definition could be found for URL value 'https://www.goodhealthhospital.be/standards/fhir/NamingSystem/patientrecord'
 WARNING: Bundle/bundle1: Bundle.entry[1].resource/*Patient/patient2*/.identifier[1].system: No definition could be found for URL value 'https://www.goodhealthhospital.be/standards/fhir/NamingSystem/patientrecord'
 WARNING: Patient/contained1: Patient.contained[0]/*Patient/patient2*/.identifier[1].system: No definition could be found for URL value 'https://www.goodhealthhospital.be/standards/fhir/NamingSystem/patientrecord'
+
+# This CapabilityStatement is provided as an example and is not intended to have an official OID assigned
+INFORMATION: Resource: The resource CapabilityStatement/capabilitystatement could usefully have an OID assigned (OIDs are easy to assign - see https://build.fhir.org/ig/FHIR/fhir-tools-ig/CodeSystem-ig-parameters.html#ig-parameters-auto-oid-root)
