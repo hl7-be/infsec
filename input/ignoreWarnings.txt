@@ -3,13 +3,14 @@
 # Add warning and/or information messages here after you've confirmed that they aren't really a problem
 # (And include comments like this justifying why)
 
-# This is inherited from the base resource
-WARNING: StructureDefinition/myObservation: StructureDefinition.snapshot.element[15].mapping[3].map: value should not start or finish with whitespace
 
-# We're expecting these to not match the slice - we're showing how you can use slicing to define the one repetition you want even when many repetitions might be present
-INFORMATION: Patient/example: Patient.name[0]: This element does not match any known slice defined in the profile http://somewhere.org/fhir/uv/myig/StructureDefinition/mypatient
-INFORMATION: Patient/example: Patient.name[1]: This element does not match any known slice defined in the profile http://somewhere.org/fhir/uv/myig/StructureDefinition/mypatient
+# This warning is expected because the examples use a fictitious local NamingSystem for demonstration purposes
+WARNING: Patient/patient1: Patient.identifier[1].system: No definition could be found for URL value 'https://www.goodhealthhospital.be/standards/fhir/NamingSystem/patientrecord'
+WARNING: Patient/patient2: Patient.identifier[1].system: No definition could be found for URL value 'https://www.goodhealthhospital.be/standards/fhir/NamingSystem/patientrecord'
+WARNING: Patient/patient3: Patient.identifier[1].system: No definition could be found for URL value 'https://www.goodhealthhospital.be/standards/fhir/NamingSystem/patientrecord'
+WARNING: Bundle/bundle1: Bundle.entry[0].resource/*Patient/patient1*/.identifier[1].system: No definition could be found for URL value 'https://www.goodhealthhospital.be/standards/fhir/NamingSystem/patientrecord'
+WARNING: Bundle/bundle1: Bundle.entry[1].resource/*Patient/patient2*/.identifier[1].system: No definition could be found for URL value 'https://www.goodhealthhospital.be/standards/fhir/NamingSystem/patientrecord'
+WARNING: Patient/contained1: Patient.contained[0]/*Patient/patient2*/.identifier[1].system: No definition could be found for URL value 'https://www.goodhealthhospital.be/standards/fhir/NamingSystem/patientrecord'
 
-# If this was a real IG, there should be examples for these profiles too.  But it's not, and I'm lazy...
-WARNING: http://somewhere.org/fhir/uv/myig/StructureDefinition/myObservation: The Implementation Guide contains no examples for this profile
-WARNING: http://somewhere.org/fhir/uv/myig/StructureDefinition/mypractitioner: The Implementation Guide contains no examples for this profile
+# This CapabilityStatement is provided as an example and is not intended to have an official OID assigned
+INFORMATION: Resource: The resource CapabilityStatement/capabilitystatement could usefully have an OID assigned (OIDs are easy to assign - see https://build.fhir.org/ig/FHIR/fhir-tools-ig/CodeSystem-ig-parameters.html#ig-parameters-auto-oid-root)
